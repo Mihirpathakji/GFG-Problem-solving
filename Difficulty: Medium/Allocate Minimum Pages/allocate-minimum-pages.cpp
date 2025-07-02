@@ -1,77 +1,83 @@
 class Solution {
-  public:
-    
-    int ispossible(vector<int> &arr, int k , int mid){
-        
-        int studentcount = 1;
-        int pagesum = 0;
-        
-        // It doesnt know that what is mid so you need to pass it in the function parameter 
-        
-        for(int i = 0 ; i< arr.size() ; i ++){
-            
-                if(pagesum + arr[i]  <= mid){
-                    pagesum += arr[i];
-                }
-                else{
-                    
-                    studentcount ++;
-                    
-                    if(arr[i] > mid || studentcount > k){
-                        return 0;  // For not executing the condition
-                    }
-                    
-                    else{
-                        pagesum = arr[i];
-                    }
-                
-                }
-            
+public:
+
+int isPossibleAllocation(vector<int>&nums,int m,int mid){
+
+    int studentcount = 1;
+    int pagesum = 0;
+    for(int i = 0; i <nums.size(); i++){
+            // nums.size() - 1 is the endeth index 
+
+        if(pagesum + nums[i] <= mid){
+                pagesum = pagesum + nums[i];
         }
-    
-        return 1; // yes 
-        
+        else{
+            studentcount ++;
+            if(studentcount > m || nums[i] > mid){
+                    return 0; // false 
+            }
+            else{
+
+                // For the new student again the pagesum should be started from 0 
+                
+                pagesum = 0;
+                pagesum += nums[i];
+            }
+
+        }
+
     }
+
+    return 1;
+
+
+
+
+}
+
+    int findPages(vector<int> &nums, int m)  {
+     
+    //  // there is  one EDGDE CASE :
+    //  -> IF THE NUMBER OF BOOKS ARE LESS THAN NUMBER OF THE STUDENTS THEN EG: BOOKS = 3 AND STUDENT =10 AND EACH STUDENT SHOULKD GET ATLEAST ONE BOOK
+    //  ->HERE THE ALLOCATION IS NOT POSSIBLE 
     
     
-    int findPages(vector<int> &arr, int k) {
+        if(nums.size() < m){
+            return -1;
+        }
+     
         
-    // Edge case : If the number of the books are even lesser than no. of students allocation is not possible for all of them hence return -1
-        if(arr.size() < k )    
-        return -1;
+        int start = 0;
+        int ans = -1;
+        // take the end as the sum of all the array elements so that serarch space should be more  available 
+        int sum  = 0;
+        int end ;
+        for(int i = 0; i < nums.size(); i++){
         
-        
-    int start = 0;
-    
-    int sum = 0;
-    
-    int end ;
-    
-    for(int i = 0; i < arr.size();i++ ){
-        sum += arr[i];
-    }
-    
-    end  = sum ;
-    
-    int ans = -1;
-    int mid;
-    
-    while(start <= end){
-        
-        mid = start + (end -start)/2;
-        
-         if(ispossible(arr,k,mid)){
-            ans = mid;
-            end = mid -1;
-             
-         }
-         else{
-            start = mid + 1;
-         }
-        
-        
-    }
-    return ans;
-        
+        sum +=  nums[i];
+        }
+
+        end = sum;
+        int mid ;
+        while(start <= end){
+            
+            mid = start + (end -start)/2;
+
+            if(isPossibleAllocation(nums,m,mid)){
+  
+            //  if(function ) -> that function must be bool
+  
+                    ans = mid;
+                    end = mid -1;
+            }
+            else{
+                start = mid + 1;
+            }
+
+        } 
+
+        return ans;
+
+
     }
 };
