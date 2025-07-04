@@ -7,7 +7,7 @@ class Solution {
     bool istrue(vector<int>& arr, int k,int mid){
         
         int boardsum = 0;
-        int painters = 1;
+        int painters = 1;    
         
         for(int i = 0; i < arr.size(); i++){
             boardsum += arr[i];
@@ -17,9 +17,10 @@ class Solution {
                 painters++;
                 boardsum = arr[i];
                 
-            }        
+            }
+    
+            
         }
-        
         return painters <= k;
         
     }
