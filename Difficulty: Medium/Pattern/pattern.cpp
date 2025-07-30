@@ -7,19 +7,19 @@ class Solution {
         // for the spaces :
         
         for(int j =1;j<=(n-i);j++){
-            printf(" ");        
+            cout << " ";        
         }
         
         // for the stars 
         
         for(int j=1;j<=i;j++){
-            printf("* ");
+            cout <<"* ";
         }
         
         // No need to print the trailing spaces at the right 
    
         
-        printf("\n");
+        cout << endl;
     
     }
     
@@ -27,17 +27,17 @@ class Solution {
             // print the spaces 
             
             for(int j=1;j<=(n-i);j++){ 
-                printf(" ");
+                cout << " ";
             }
             
             //print the stars :
             for(int j=1;j<=i;j++){ 
-                printf("* ");
+                cout<<"* " ;
             }
             
             // No need to print the trailing spaces at the right 
             
-            printf("\n");
+            cout << endl;
             
         }
     
