@@ -1,36 +1,69 @@
 class Solution {
   public:
     vector<int> findUnion(vector<int> &a, vector<int> &b) {
+       //Using Two Pointer Since we are Given with two arrays we can operate on each one of them
        
-       int n1=a.size();    
-       set<int>a1; 
-       for(int i=0;i<n1;i++)
+       int i=0;
+       int j=0;
+       vector<int>ans;// empty vector n=0
+       //Assinging the first value to the ans :
+       
+       if(a[i]<b[j])
        {
-            a1.insert(a[i]);
+           ans.push_back(a[i]);
+           i++;
        }
-        
-        //a1 contains All the Unique elements of the vector a 
-        
-        int n2=b.size();
-        set<int>b1;
-        for(int i=0;i<n2;i++)
-        {
-            b1.insert(b[i]);
-        }
-        
-        //b1 contains all the UNIQUE elements of the vector b    
-        
-        set<int>ans;
-        
-        ans.insert(a1.begin(),a1.end());
-        
-        ans.insert(b1.begin(),b1.end());
-        
-        vector<int>findunion;
-        
-        findunion.assign(ans.begin(),ans.end());   
-        
-        return findunion;
-        
+       
+       else
+       {
+          ans.push_back(b[j]);
+          j++;
+       }
+       
+       while(i<a.size() && j<b.size())
+       {
+           if(a[i]<b[j])
+           {
+                if(ans.back()!=a[i])
+                {
+                    ans.push_back(a[i]);
+                }
+                i++;
+           }
+           else
+           {
+               if(ans.back()!=b[j])
+               {
+                   ans.push_back(b[j]);
+               }
+               j++;
+           }
+       }//O(min(n1,n2))
+       
+       while(i<a.size())
+       {
+           //a.size()==10000000 <-IN the WORST CASE O(a.size)==O(n1)
+           if(a[i]!=ans.back())
+           {
+               ans.push_back(a[i]);
+           }
+           i++;
+       }
+       
+       while(j<b.size())
+       {
+           //->Worst case -> O(b.size())  -> O(10000000)  == O(n2)
+           if(b[j]!=ans.back())
+           {
+                ans.push_back(b[j]);       
+           }
+           j++;
+       }
+       
+       return ans;
+       
+       //Tc : O(n1+n2)
+       //SC : O(n1+n2)
+       
     }
 };
