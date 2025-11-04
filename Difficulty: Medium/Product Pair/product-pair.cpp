@@ -3,31 +3,39 @@
 class Solution {
   public:
     bool isProduct(vector<int> arr, long long x) {
-        
-        int start=0;
-        int end=arr.size()-1;
-        sort(arr.begin(),arr.end());
-        long long int product=1;
-        while(start<end)
+
+        unordered_map<int,bool>mp;
+        int n=arr.size();
+        for(int i=0;i<n;i++)
         {
-            product=(long long)arr[start]*(long long)arr[end];
-            if(product==x)
-            {
-                return true;
-            }
-            else if(product<x)
-            {
-                start++;
-            }
-            else
-            {
-                end--;
-            }
+            mp[arr[i]]=true;
         }
-        return false;
+     // x = arr[i]*y  -> if we find out existence of y in the arr[]  y== x/arr[i]  if it is present in the arr[] that means we ca  find the product;
         
-        //TC : nlogn+n==nlogn
-        //SC:  O(1)
         
+         for(int i=0;i<n;i++)
+         {
+             if(arr[i]==0 && x==0)
+             {
+                 return true;
+             }
+             else if(arr[i]==0 && x!=0)
+             {
+                 continue;
+             }
+             else
+             {
+                 if(x%arr[i]==0 && mp.find(x/arr[i])!=mp.end())
+                 {
+                    return true;
+                 }
+             }
+         }
+         return false;
+    
+    //TC : O(n)
+    //SC : O(n)
+
+
     }
 };
