@@ -1,8 +1,9 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/rotate-by-90-degree0356/1">Rotate by 90 degree</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a<strong> </strong>square&nbsp;<strong>mat[][]</strong>. The task is to rotate it by<strong> 90 degrees in clockwise</strong> direction without using any extra space.</span></p>
-<p><span style="font-size: 18px;"><strong>Examples:</strong></span></p>
-<pre><span style="font-size: 18px;"><strong>Input: </strong>mat[][] = [[1 2 3], [4 5 6], [7 8 9]]
-<strong>Output:</strong>
-7 4 1 <br>8 5 2<br>9 6 3</span></pre>
-<pre><span style="font-size: 18px;"><strong>Input: </strong>mat[][] = [1 2], [3 4]<br><strong>Output:<br></strong>3 1 <br>4 2<br></span></pre>
-<pre><strong><span style="font-size: 14pt;">Input: </span></strong><span style="font-size: 14pt;">mat[][] = [[1]]<br><strong>Output:<br></strong></span><span style="font-size: 14pt;">1</span></pre>
-<p><span style="font-size: 18px;"><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Constraints:<br></strong></span><span style="font-size: 18px;">1 ≤ mat.size() ≤ 1000<br></span><span style="font-size: 18px;">1 &lt;= mat[][] &lt;= 100</span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Paytm</code>&nbsp;<code>Zoho</code>&nbsp;<code>Morgan Stanley</code>&nbsp;<code>Amazon</code>&nbsp;<code>Microsoft</code>&nbsp;<code>Samsung</code>&nbsp;<code>Snapdeal</code>&nbsp;<code>D-E-Shaw</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Matrix</code>&nbsp;<code>Data Structures</code>&nbsp;
+<h2><a href="https://www.geeksforgeeks.org/problems/rotate-by-90-degree-1587115621/1">Rotate by 90 degree</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a<strong> </strong>square<strong> </strong>matrix <strong>mat</strong>[][] of size <strong>n x n</strong>. The task is to rotate it by<strong> 90 degrees</strong> in an<strong> anti-clockwise</strong> direction without using any extra space.&nbsp;</span><br><br><span style="font-size: 18px;"><strong>Examples:</strong></span></p>
+<pre><span style="font-size: 18px;"><strong>Input</strong>: mat[][] = [[0, 1, 2], <br>                [3, 4, 5], <br>                [6, 7, 8]] 
+<strong>Output</strong>: [[2, 5, 8],
+        [1, 4, 7],
+        [0, 3, 6]]</span></pre>
+<pre><span style="font-size: 18px;"><strong>Input</strong>: mat[][] = [[1, 2],
+&nbsp;               [3, 4]]
+<strong>Output</strong>: [[2, 4],<br></span><span style="font-size: 18px;">        [1, 3]]<br></span></pre>
+<p><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 ≤ n ≤ 10<sup>2</sup><br>0 ≤ mat[i][j] ≤ 10<sup>3</sup></span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Paytm</code>&nbsp;<code>Microsoft</code>&nbsp;<code>Samsung</code>&nbsp;<code>Adobe</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Matrix</code>&nbsp;<code>Data Structures</code>&nbsp;<code>Algorithms</code>&nbsp;
