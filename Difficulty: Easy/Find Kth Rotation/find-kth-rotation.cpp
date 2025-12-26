@@ -16,9 +16,9 @@ class Solution {
               if(arr[low]<=arr[mid])
               {
                 //find minimum from sorted part and get's its index.
-                ans1=ans;
-                ans=min(ans,arr[low]);//ans=arr[low]
-                if(arr[low]<ans1)
+                ans1=ans;//2  2
+                ans=min(ans,arr[low]);//ans=arr[low]//2  
+                if(ans1!=ans)
                 {
                     index=low;
                 }
@@ -27,10 +27,10 @@ class Solution {
               else
               {
                   ans1=ans;
-                  ans=min(ans,arr[mid]);
-                  if(arr[mid]<ans1)
+                  ans=min(ans,arr[mid]);//ans=arr[mid]
+                  if(ans1!=ans)
                   {
-                    index=mid;
+                    index=mid;//2<INT_MAX ->index=2;
                   }
                   high=mid-1;
               }
