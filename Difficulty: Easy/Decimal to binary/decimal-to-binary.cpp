@@ -3,19 +3,23 @@ class Solution {
     string decToBinary(int n) {
         
         string ans;
-        while(n)
-        {//12 6 3 1
         
-            if(n%2 ==0)
-            ans.push_back('0');//0011
-             
-            else
-            ans.push_back('1');
-             
-             
-            n /= 2;// 6 3 1 0
+        while(n)
+        {
+            ans.push_back(n%2 + '0');
+            n/= 2;           
         }
-        reverse(ans.begin(),ans.end());
+        
+        
+        //this loop will run till logn time.
+        
+        //logn as well as ans will contain logn characters
+        
+        reverse(ans.begin(),ans.end());//O(m) = O(logn)
         return ans;
+        
+        //TC:O(logn)+O(logn) == O(logn)
+        //SC:O(logn)
+        
     }
 };
