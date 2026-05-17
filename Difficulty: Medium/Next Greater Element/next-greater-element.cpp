@@ -4,45 +4,26 @@ class Solution {
         
         int n = arr.size();
         
-        vector<int>next_greater(n);
-        stack<int>st;
+        stack<int>st;//store the indices of the elements for which the next Greater element is not yet 
+        //Founded.
         
+        st.push(0);
+        vector<int>ans(n,-1);
         
-        for(int i = n -1 ; i >= 0 ; i--)
+        for(int i = 1 ; i < n; i++)
         {
+            while(!st.empty() && arr[i] > arr[st.top()])
+            {
+                ans[st.top()] = arr[i];//arr[i] is next Greater for the element at the index
+                //st.top().
+                
+                st.pop();
+            }
             
-            if(st.empty())
-            {
-                next_greater[i] = -1;
-                st.push(arr[i]);
-            }
-            else if(!st.empty() && st.top() > arr[i])
-            {
-                next_greater[i] = st.top();
-                st.push(arr[i]);
-            }
-            else
-            {
-                while(!st.empty() && st.top() <= arr[i])
-                {
-                        st.pop();
-                }
-                if(st.empty())
-                {
-                    next_greater[i] = -1;
-                    st.push(arr[i]);
-                }
-                else
-                {
-                    next_greater[i] = st.top();
-                    st.push(arr[i]);
-                }
-                
-            }
-                
+            st.push(i);
         }
         
-        return next_greater;
+        return ans;
         
-        }
+    }
 };
