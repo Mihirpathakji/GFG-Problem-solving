@@ -15,8 +15,9 @@ class Solution {
             }
             
             st.push(i);
-        }
-    
+        }//O(n).
+        
+
         for(int i = 0 ; i< st.top() ;i ++)
         {
             while(!st.empty() && arr[i] > arr[st.top()])
@@ -25,8 +26,12 @@ class Solution {
                 st.pop();
             }
         }
+        //O(n)
     
         return ans;
-        
     }
+    
+    //TC : O(n)
+    //SC : O(n)
+
 };
