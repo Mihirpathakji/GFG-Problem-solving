@@ -8,8 +8,7 @@ class Solution {
         {
             st.push(i);
         }
-        
-        vector<int>temp;
+
         int ele1;
         int ele2;
         
@@ -26,28 +25,17 @@ class Solution {
                 {
                     //ele2 is possible ans.
                     st.push(ele2);
-                    temp.push_back(ele1);
-                }
-                else
-                {
-                    temp.push_back(ele1);
-                    temp.push_back(ele2);
                 }
             }
             
-            else if(mat[ele1][ele2] == 0)
+            else
             {
                 if(mat[ele2][ele1] == 1)
                 {
                     st.push(ele1);
-                    temp.push_back(ele2);
-                }
-                else
-                {
-                    temp.push_back(ele1);
-                    temp.push_back(ele2);
                 }
             }
+            
         }
         
         if(st.empty())
@@ -57,14 +45,14 @@ class Solution {
         
         bool flag = true;
         
-        for(int i = 0 ; i < temp.size() ; i ++)
-        {
-            if(mat[st.top()][temp[i]] == 1)
+        for(int i = 0 ; i < mat[0].size(); i ++)
+        {//1 2 3
+            if(i!=st.top() && mat[st.top()][i] == 1)
             {
                 flag = false;
                 break;
             }
-            else if(mat[temp[i]][st.top()] == 0)
+            else if(i!=st.top() && mat[i][st.top()] == 0)
             {
                 flag = false;
                 break;
