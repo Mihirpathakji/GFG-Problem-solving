@@ -36,9 +36,13 @@ class Solution {
                 }   
                 i++;
             }
+            
             j++;
         }
         return ans;
         
+        
+        //TC : O(n)
+        //SC : O(k + n - (k-1)) == O(k + n - k  +1) == O(n+1) = O(n)
     }
 };
