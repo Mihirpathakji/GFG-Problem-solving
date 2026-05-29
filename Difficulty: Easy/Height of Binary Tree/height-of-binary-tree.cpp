@@ -1,4 +1,5 @@
 /*
+Definition for Node
 class Node {
 public:
     int data;
@@ -7,51 +8,29 @@ public:
 
     Node(int val) {
         data = val;
-        left = right = NULL;
+        left = right = nullptr;
     }
 };
 */
 
 class Solution {
   public:
-    int height(Node* root) {
+  
+    int get_my_height(Node* root)
+    {
         
-        //Level order Traversal:
-        
-        queue<Node*>q;
-        
-        q.push(root);//100
-        
-        vector<vector<int>>levels;
-        
-        while(!q.empty())
+        if(!root)
         {
-            vector<int>ans;
-            int size = q.size();//1  2  3  2
-            
-            for(int i = 0; i < size; i++)
-            {//0  1<2
-                //q = ""
-                root = q.front();//700
-                ans.push_back(root->data);//[6 7]
-                q.pop();//
-                
-                if(root->left)
-                {
-                    q.push(root->left);
-                }
-                
-                if(root->right)
-                {
-                    q.push(root->right);
-                }
-                
-            }
-            
-            levels.push_back(ans);//[[1] [2 3] [4 10 5 ] [6 7] ]
+            return -1;
         }
         
-        return levels.size()-1;
+        return 1 + max(height(root->left),height(root->right));
+    }
+    
+    int height(Node* root) {
+        
+        int ans = get_my_height(root);//3
+        return ans;
         
     }
 };
