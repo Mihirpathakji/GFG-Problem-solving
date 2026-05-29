@@ -14,26 +14,18 @@ struct Node {
 class Solution {
   public:
   
-    int get_my_ans(Node* root)
-    {
+
+    int getSize(Node* root) {
         
         if(root == NULL)
         {
             return 0;
         }
         
-        int nodes_on_left = get_my_ans(root->left);
-        int nodes_on_right = get_my_ans(root->right); 
+        int nodes_on_left = getSize(root->left);//Count total_number of nodes on the left.
+        int nodes_on_right = getSize(root->right);//Count total_number of nodes on right. 
         
         return nodes_on_left + nodes_on_right + 1;
-
-    }
-
-    int getSize(Node* root) {
-        
-        int size = 0;
-        size = get_my_ans(root);
-        return size;
     
     }
 };
