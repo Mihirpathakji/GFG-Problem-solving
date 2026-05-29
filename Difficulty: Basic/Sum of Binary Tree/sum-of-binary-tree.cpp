@@ -1,55 +1,40 @@
-/* A binary tree node has data, pointer to left child
-   and a pointer to right child
-struct Node
-{
+/*
+Definition for Node
+class Node {
+public:
     int data;
-    struct Node* left;
-    struct Node* right;
+    Node* left;
+    Node* right;
 
-    Node(int x){
-        data = x;
-        left = right = NULL;
+    Node(int val) {
+        data = val;
+        left = right = nullptr;
     }
-}; */
-
-// Function to return a list containing the level order traversal in spiral form.
+};
+*/
 class Solution {
   public:
-    int sumBT(Node* root) {
-        
-        int sum = 0;
-        queue<Node*>q;
+    
+    int get_my_ans(Node* root)
+    {
         
         if(root == NULL)
         {
             return 0;
         }
         
-        q.push(root);
+        int left_sum = get_my_ans(root->left);//Obtain the sum from the left subtree.
+        int right_sum = get_my_ans(root->right);//Obtain the sum from the right subtree.
         
-        while(!q.empty())
-        {
-            int size = q.size();
-            for(int i = 0; i < size ; i++)
-            {
-                root = q.front();
-                sum += (root->data);
-                
-                q.pop();
-                
-                if(root->left)
-                {
-                    q.push(root->left);
-                }
-                if(root->right)
-                {
-                    q.push(root->right);
-                }
-            }
-        }
+        return left_sum + right_sum + root->data;
+    }
+  
+  
+    int sumBT(Node* root) {
+        
+        int sum = 0;
+        sum = get_my_ans(root);
         
         return sum;
-    
     }
-    
 };
