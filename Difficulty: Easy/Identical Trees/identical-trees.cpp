@@ -35,9 +35,9 @@ class Solution {
       {
           if(r1->data == r2->data)
           {
-            bool left_side = isIdentical(r1->left,r2->left);
-            bool right_side = isIdentical(r1->right,r2->right);
-            return left_side && right_side;
+            bool left_side = isIdentical(r1->left,r2->left);//F
+            bool right_side = isIdentical(r1->right,r2->right);// F
+            return left_side && right_side;//F
           }
           else
           {
@@ -45,7 +45,7 @@ class Solution {
           }
       }
       
-      return true;
+      return false;
        
     }
 };
