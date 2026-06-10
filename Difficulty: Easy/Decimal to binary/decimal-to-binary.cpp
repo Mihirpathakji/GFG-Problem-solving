@@ -2,24 +2,18 @@ class Solution {
   public:
     string decToBinary(int n) {
         
+        int remainder;
         string ans;
-        
-        while(n)
+        while(n > 0)
         {
-            ans.push_back(n%2 + '0');
-            n/= 2;           
+            remainder =  n % 2;//1
+            ans.push_back(remainder + '0');
+            n/=2;//3//1 
         }
-        
-        
-        //this loop will run till logn time.
-        
-        //logn as well as ans will contain logn characters
-        
-        reverse(ans.begin(),ans.end());//O(m) = O(logn)
+        reverse(ans.begin(),ans.end());
         return ans;
         
-        //TC:O(logn)+O(logn) == O(logn)
-        //SC:O(logn)
-        
+        //TC : O(logn)
+    
     }
 };
