@@ -16,6 +16,7 @@ class Solution {
             else if(visited[v] == true) {
                 return true;
             }
+            
             else {
                 if(detect_cycle(v,node,adj_list,visited)) {
                     return true;
@@ -24,6 +25,7 @@ class Solution {
         }
         
         return false;
+        
     }
     
   
@@ -45,8 +47,8 @@ class Solution {
         
         for(int i = 0;i < V;i++) {
             
-            if(!visited[i]){
-                if(detect_cycle(i,i-1,adj_list,visited)) {
+            if(!visited[i]) {
+                if(detect_cycle(i,-1,adj_list,visited)) {
                     return true;
                 }
             }
@@ -54,6 +56,9 @@ class Solution {
         }
         
         return false;
+        
+        //TC : O(V)
+        //SC : O(V)
         
     }
 };
