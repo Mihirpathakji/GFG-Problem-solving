@@ -9,9 +9,7 @@ class Solution {
         int n = grid.size();
         int m = grid[0].size();
         
-        vec.push_back({row - base_row , col - base_col});
-        
-        //dfs at it's neighbours.
+        vec.push_back({row - base_row ,col - base_col});//
         
         int row_dir[4] = {0,1,0,-1}; 
         int col_dir[4] = {1,0,-1,0};
@@ -26,27 +24,34 @@ class Solution {
   
     int countDistinctIslands(vector<vector<char>>& grid) {
         
+        
+        //We can differentiate the shapes based on their
+        //relative positions with respect to the origin of 
+        //that island.
+        
         int n = grid.size();
         int m = grid[0].size();
         
         vector<vector<bool>>visited(n,vector<bool>(m,false));
-        int ans = 0;
-        set<vector<pair<int,int>>>st;
+        set<vector<pair<int,int>>>st; 
         
         for(int i = 0;i < n;i++) {
             for(int j = 0;j < m;j++) {
                 if(visited[i][j] == false && grid[i][j] == 'L') {
-                    int base_row = i;
-                    int base_col = j;//since we need to subtract every 
+                    int base_row = i;//0 1 2 // 0 0 3
+                    int base_col = j;//0 2 0.// 0 4 0.since we need to subtract every 
                     //element coming in the vector with this 
                     //base row and base col.
                     
-                    vector<pair<int,int>>vec;
+                    vector<pair<int,int>>vec;//Stores the relative .
+                    //positions of the Neighbouring lands with respect to 
+                    //the origin of the island for this entire dfs.
                     dfs(i,j,grid,visited,vec,base_row,base_col);
                     st.insert(vec);
                 }
             }
         }
+        
         return st.size();
     
     }
