@@ -1,5 +1,7 @@
+//JAY SHREE RAM.
 class Solution {
   public:
+  
     vector<int> topoSort(int V, vector<vector<int>>& edges) {
         
         //Kahn Algorithm :- (BFS of Topological sort)
@@ -16,7 +18,7 @@ class Solution {
                 
         }
         
-        vector<int>indegree(V,0);
+        vector<int>indegree(V,0);//
         
         for(int i = 0;i < edges.size();i++) {
             int v = edges[i][1];//v has an inward edge for every u-v edge.
@@ -30,36 +32,42 @@ class Solution {
         
         for(int i = 0;i < V;i++) {
             if(indegree[i] == 0) {
-                q.push(i);
+                q.push(i);//These are all possible u.
             }
         }
-        
+    
+        //q =  [1 2 3].
         vector<int>ans;
         
         while(!q.empty()) {
             
-            int node = q.front();
-            q.pop();
-            if(indegree[node] == 0) {
-                ans.push_back(node);
-            }
-        
+            int node = q.front();// 1 2 3 0 
+            q.pop();//
             
-            for(auto& v : adj_list[node]) {
-                if(indegree[v] == 0) {
+            if(indegree[node] == 0) { 
+                ans.push_back(node);// [1 2 3 0 ] .    
+            }
+            
+            for(auto& v : adj_list[node]  ) { 
+                
+                if(indegree[v] == 0) { 
                     q.push(v);
                 }
                 else {
-                    indegree[v]--;
+                    indegree[v]--;//2 1 0 
                     if(indegree[v] == 0) {
-                        q.push(v);
+                        q.push(v);//[0].
                     }
                 }
+                
             }
+            
         }
         
         return ans;
         
+        //TC : O(V + E)
+        //SC : O(V)
         
     }
 };
