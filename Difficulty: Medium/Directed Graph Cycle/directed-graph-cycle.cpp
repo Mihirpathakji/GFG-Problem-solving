@@ -1,58 +1,66 @@
 class Solution {
-  
   public:
-  
-    bool dfs(int start,unordered_map<int,vector<int>>&mp,vector<int>&visited,vector<int>&Same_Path_visited) {
-        
-        visited[start] = 1;
-        Same_Path_visited[start] = 1;
-        
-        for(int v : mp[start]) {
-            if(visited[v] == 0) {
-                 if(dfs(v,mp,visited,Same_Path_visited) == true) {
-                     return true;
-                 }
-            }    
-            else {
-                if(Same_Path_visited[v] == 1) {
-                    return true;
-                }
-            }
-        }
-        
-        Same_Path_visited[start] = 0;
-        return false;
-        
-    }
-  
     bool isCyclic(int V, vector<vector<int>> &edges) {
         
-        
-        //Directed graph adj_list.
-        unordered_map<int , vector<int>>mp;
+        vector<int>ans;
+        vector<int>indegree(V,0);
         
         for(int i = 0;i < edges.size();i++) {
             
-            int u = edges[i][0];
             int v = edges[i][1];
-                
-            mp[u].push_back(v);
+            
+            indegree[v]++;
+        }    
+    
+        
+        unordered_map<int,vector<int>>adj_list;
+        
+        for(auto& edge : edges ) {
+            
+            int u = edge[0];
+            int v = edge[1];
+            
+            adj_list[u].push_back(v);
+
         }
         
-        vector<int>visited(V,0);
-        vector<int>Same_Path_visited(V,0);
-        
+        queue<int>q;
         for(int i = 0;i < V;i++) {
-            if(!visited[i]) {
-                if(dfs(i,mp,visited,Same_Path_visited) == true) {
-                    return true;
+            if(indegree[i] == 0) {
+                q.push(i);
+            }
+        }
+        
+        while(!q.empty()) {
+            
+            int node = q.front();
+            
+            q.pop();
+            
+            if(indegree[node] == 0) {
+                ans.push_back(node);
+            }
+            
+            for(auto v :  adj_list[node]  ) {
+                
+                if(indegree[v] == 0) {
+                    q.push(v);
+                }
+                else {
+                    indegree[v]--;
+                    if(indegree[v] == 0) {
+                        q.push(v);
+                    }
                 }
             }
         }
         
-        return false;
+        return ans.size()!=V;
         
-        //
-      
+        //TC : O(V + E)
+        //SC : O(V)
+    
+
+
     }
 };
