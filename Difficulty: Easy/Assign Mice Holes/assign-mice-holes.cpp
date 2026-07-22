@@ -10,8 +10,7 @@ class Solution {
         int min_time = 0;
         
         for(int i = 0;i < n;i++) {
-            min_time = max(min_time,abs(mices[i] - holes[i]));//Maximise the Distance between 
-            //the most adjacent holes and mices.
+            min_time = max(min_time,abs(mices[i] - holes[i]));
         }
         
         return min_time;
