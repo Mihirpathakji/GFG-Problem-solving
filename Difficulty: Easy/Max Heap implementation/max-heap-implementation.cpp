@@ -1,14 +1,23 @@
 class maxHeap {
 
   public:
-
-    int arr[1000];
-    int total_size = 1000;
-    int curr_size = 0;
-    //This are the Members of the class  we need object inorder to access them.
-
-    maxHeap H1();
   
+    //Class members: 
+  
+    int* arr;//integer pointer.
+    int curr_size;
+
+    maxHeap() {
+        
+        //Only Initialize the data members here.
+        
+        arr = new int[1000];//points to an Element of an Array memenory address ......
+        curr_size = 0;
+        
+    }
+    
+    maxHeap H1();
+    
     void push(int x) {
         
         arr[curr_size] = x;//arr[7] = x.
