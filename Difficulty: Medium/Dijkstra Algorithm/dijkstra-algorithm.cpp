@@ -1,91 +1,82 @@
 class Solution {
-	public:
-	vector<int> dijkstra(int V, vector<vector<int>> &edges, int src) {
-		
-		priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> >pq; // Min Heap.
-		
-		unordered_map<int, vector<pair<int, int>> >adj_list;
-		vector<int>visited(V, 0);
-		
-		for (int i = 0; i < edges.size(); i++) {
-			
-			int u = edges[i][0];
-			int v = edges[i][1];
-			
-			int wt = edges[i][2];
-			
-			adj_list[u].push_back({v, wt});
-			adj_list[v].push_back({u, wt});
-			
-		}
-		
-		//O(V+2*E)
-		
-		vector<int>ans_distance(V, INT_MAX);
-		ans_distance[src] = 0;
-		
-		pq.push({0, src}); // {Shortest_distance from source ,node_value}.
-		//{dist,node_value}.
-		
-		while (!pq.empty()) {
-		    
-		    //O(V).
-			
-			int node = pq.top().second;//Will give the Shortest Distant node
-			//from the source node first.
-			
-			pq.pop();//log(V).
+  public:
+  
+    vector<int> dijkstra(int V, vector<vector<int>> &edges, int src) {
+        
+        unordered_map<int,vector<pair<int,int>>>adj_list;
+        
+        for(int i = 0;i < edges.size();i++) {
+            
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int weight = edges[i][2];
+            
+            adj_list[u].push_back({v,weight});
+            adj_list[v].push_back({u,weight});
+            
+        }
+        
+        vector<int>ans_distance(V,INT_MAX);//[]
+        
+        vector<int>visited(V,0);//[]
+        
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
+       
+        int parent_node = -1;
+        pq.push({0,{src,parent_node}});//{0,{0,-1}}.
+        
+        ans_distance[src] = 0;//
 
-			if (visited[node] == 1) {
-				continue;
-			}
-			else {
-			    
-			    visited[node] = 1;
-				
-				// Relax the Edges.
-				
-				for (auto& v : adj_list[node]) {
-					
-					int vertex = v.first;
-					int weight = v.second;
-					
-					//Minimize the shortest distance for the 
-					//adjacent nodes of the node.
-					
-					if (visited[vertex] == 0 && ans_distance[node] != INT_MAX) {
-						if (ans_distance[vertex] > ans_distance[node] + weight) {
-							ans_distance[vertex] = ans_distance[node] + weight;//4.8.10.
-							pq.push({ans_distance[vertex], vertex});//
-							//so that Min Heap is formed on the basis of the shortest distance.
-					        //O(logV)
-						}
-					}
-					
-				}
-				
-				
-			}
-			
-		}
-		
-		for (int i = 0; i < V; i++) {
-			if (ans_distance[i] == INT_MAX) {
-				ans_distance[i] = -1;
-			}
-		}
-		
-		return ans_distance;
-		//TC : O(E*Logv) == O(V^2logV).
-		//We are getting Accepted because Majority of the test cases 
-		//given in this problem are the sparse Graphs.
-		//i.e Number of the edges are very lessser.
-		//E is Approximated not to V^2 But to V.Since the 
-		//E is very very lesser in the sparse Graphs.Hence , E APPROX
-		// == V.
-		
-		//SC : O(V + E) <-  IMP. Priority Queue can take the 
-		//space upto the number of the edges.
-		
-	}
+        while(!pq.empty()) {
+            
+            int weight = pq.top().first;//0.4.
+            int curr_node = pq.top().second.first;//0.1.
+            int parent_node = pq.top().second.second;//-1.0.
+            
+            //In the priority_Queue.We are pushing the weight from the 
+            //parent node of that particular node.
+            //But if we wanted is the *Min_distance from the source node.
+        
+            pq.pop();
+            
+            if(visited[curr_node] == 1) {
+                continue;
+            }            
+            
+            else {
+            
+                visited[curr_node] = 1;//1. 
+                
+                for(auto it : adj_list[curr_node]) {
+                    
+                    int u = it.first;//1. 4. 2.
+                    int weight = it.second;//4. 6. 6.
+                     
+                    //If the adjacent element is not visited than we need to 
+                    //push the minimum distance of that node from the source node.
+                    
+                    if(visited[u] == 0) {
+                        //i.e it's shortest distance from the source node is not yet finalized.
+                        
+                        if(ans_distance[u] > ans_distance[curr_node] + weight) {
+                            ans_distance[u] = ans_distance[curr_node] + weight;
+                        }
+                        
+                        pq.push({ans_distance[u],{u,curr_node}});
+                        
+                        //Now the ans_distance[u] will be the shortest distance
+                        //of that node u from the source node.
+                    }
+        
+                }
+            
+            }
+            
+        }
+        
+        
+        return ans_distance;
+        
+        
+    }
 };
