@@ -1,29 +1,20 @@
 class Solution {
   public:
-  
     int findMin(int n) {
+
+        vector<int>arr = {1,2,5,10};
+        int j = 3;
+        int min_coins = 0;
         
-        int remainder = n%10;//1
-        int curr_coins = n/10;//12 
-        
-        vector<int>vec = {1,2,5};
-            
-        int i = 2;    
-        while(remainder && i >= 0) {
-            
-            if(remainder >= vec[i]) {
+        while(j>=0) {
                 
-                curr_coins += remainder/vec[i];//13
-                remainder = (remainder % vec[i]);//0
-            }
+            min_coins += n/arr[j];
+            n = n%arr[j];
             
-            i--;//1 0 -1
-            
+            j--;
         }
+    
+        return min_coins;
         
-        return curr_coins;
-        
-      
-      
     }
 };
