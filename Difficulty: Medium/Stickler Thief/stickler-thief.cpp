@@ -8,16 +8,14 @@ class Solution {
         }
         
         if(dp[i] != -1) {
-            return dp[i]; 
+            return dp[i]; //11.
         }
         
-        int one_poss = arr[i] + solve(i+2,arr,dp,n);
+        int one_poss = arr[i] + solve(i+2,arr,dp,n);// 2.6. // 11.
         
-        int second_poss = solve(i+1,arr,dp,n);
+        int second_poss = solve(i+1,arr,dp,n);//0.11.2.
         
-        return dp[i] = max(one_poss,second_poss);
-        
-        //
+        return dp[i] = max(one_poss,second_poss);//11.11.
         
     }
   
@@ -30,19 +28,11 @@ class Solution {
         
         vector<int>dp(n+1,-1);
         
-        solve(i,arr,dp,n);
+        return solve(i,arr,dp,n);
         
-        int max_ans = 0;
-        
-        for(int i = 0;i < n;i++) {
-            max_ans = max(max_ans,dp[i]);    
-        }        
 
-        return max_ans;
-
-        //TC : O(2^n)
-        //SC : O(n) // If some are popped -> less than n -> at max == n
-        //elements will be there in the stack at a PARTICULAR INSTANT.
+        //TC : O(n)
+        //SC : O(n) 
         
     }
 };
