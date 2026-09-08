@@ -1,24 +1,5 @@
 class Solution {
   public:
-    
-    int solve(int i , vector<int>& arr,vector<int>&dp,int n ) {
-        
-        if(i>=n) {
-            return 0;
-        }
-        
-        if(dp[i] != -1) {
-            return dp[i]; //11.
-        }
-        
-        int one_poss = arr[i] + solve(i+2,arr,dp,n);// 2.6. // 11.
-        
-        int second_poss = solve(i+1,arr,dp,n);//0.11.2.
-        
-        return dp[i] = max(one_poss,second_poss);//11.11.
-        
-    }
-  
   
     int findMaxSum(vector<int>& arr) {
 
@@ -26,9 +7,28 @@ class Solution {
         
         int i = 0;
         
+        //Bottom Up : 
+        
         vector<int>dp(n+1,-1);
         
-        return solve(i,arr,dp,n);
+        //We do the job in one for loop.First solve the smallest subproblem
+        //Thereby keep going upwards and solve the bigger problems.
+        //Here dp[n-1] is the smallest subproblem.
+        
+        dp[n-1] = arr[n-1];//2.
+        
+        for(int i = n-2;i >= 0;i--) {
+            
+            if(i+2 >=n) {
+                dp[i] = max(arr[i],dp[i+1]);
+            }
+            else {
+                dp[i] = max(arr[i] + dp[i+2],dp[i+1]);
+            }
+            
+        }
+        
+        return dp[0];
         
 
         //TC : O(n)
