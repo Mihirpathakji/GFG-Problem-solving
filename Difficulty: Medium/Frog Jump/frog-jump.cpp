@@ -1,35 +1,33 @@
 class Solution {
   public:
-    
-    int solve(int i,vector<int>&height,int n,vector<int>&dp) {
-        
-            
-        if(dp[i]!=-1) {
-            return dp[i];
-        }
-        
-        if(i == n-1) {
-            return dp[i] = 0;
-        }
-        
-        else if(i == n-2) {
-            return dp[i] = abs(height[n-2]-height[n-1]);
-        }
-    
-        return dp[i] = min(abs(height[i]-height[i+1]) + solve(i+1,height,n,dp) , abs(height[i]-height[i+2]) + solve(i+2,height,n,dp));
-        
-    }
-    
   
     int minCost(vector<int>& height) {
 
         int n = height.size();
         
-        int i = 0;
+        int first = 0;//dp[i+2] 0.
         
-        vector<int>dp(n+1,-1);
+        if(n == 1) {
+            return 0;
+        }
         
-        return solve(i,height,n,dp);
+        int second = abs(height[n-1]-height[n-2]);//dp[i+1] //30.
+        int third = 0;//dp[i]
+        
+        if(n == 2) {
+            return abs(height[n-1]-abs(height[n-2]));
+        }
+        
+        for(int i = n-3;i >=0;i--) {
+            third =  min( abs(height[i]-height[i+1]) + second  , abs(height[i]-height[i+2]) +first);//10.20.
+            first = second;//30.10
+            second = third;//10.20.40.
+        }
+        
+        return third;
+        
+        //TC : O(n)
+        //SC : O(1)
 
     }
 };
