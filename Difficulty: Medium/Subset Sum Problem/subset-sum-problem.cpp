@@ -1,54 +1,43 @@
 class Solution {
   public:
-    
-    bool solve(int index,int target,vector<int>&arr,vector<vector<int>>&dp) {
-           
-        if(dp[index][target] != -1) {
-            return dp[index][target];
-        }   
-        
-        if(target == 0) {
-            return dp[index][target] = 1;
-        }
-           
-        if(index == 0) {
-        
-            if(arr[index] == target) {
-                return dp[index][target] = 1;
-            }
-            else {
-                return dp[index][target] = 0;
-            }
-        }
-        
-        bool take = false;
-        if(arr[index] <= target) {
-            take = solve(index-1,target-arr[index],arr,dp);
-        }
-        
-        bool no_take = solve(index-1,target,arr,dp); 
-        
-        if(take || no_take) {
-            return dp[index][target] = 1;
-        }
-        
-        return dp[index][target] = 0;
- 
-    }
-    
-  
     bool isSubsetSum(vector<int>& arr, int sum) {
+
         
-        int n = arr.size();
-        int index = n-1;
-        
+        int n = arr.size();    
         int target = sum;
         
-        vector<vector<int>>dp(n+1,vector<int>(target+1,-1));
+        //Bottom UP : 
+        
+        int max_Sum = 0;
+        
+        for(int i = 0;i < n;i++) {
+            max_Sum += arr[i];
+        }
+        
+        vector<vector<int>>dp(n,vector<int>(max(max_Sum+1,target+1),0));
+        //assume that till this index this target sum can't be 
+        //achived.
+        
+        //Base case : 
+        
+        //1.For index.
+        
+        dp[0][arr[0]] = 1;
+        
+        //2.For target.
+        
+        for(int i = 0;i < n;i++) {
+            dp[i][0] = 1;
+        }
+        
+        for(int index = 1;index < n;index++) {
+            
+            for(int target = 1;target <= sum;target++) {
+                dp[index][target] = (dp[index-1][target] || (arr[index] <= target && dp[index-1][target-arr[index]]));
+            }
+        }
+        
+        return dp[n-1][sum];
 
-        solve(index,target,arr,dp);
-        
-        return dp[n-1][target];
-        
     }
 };
